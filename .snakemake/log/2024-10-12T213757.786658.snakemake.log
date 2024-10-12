@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+split_bed_files        1
+total                  1
+
+Select jobs to execute...
+
+[Sat Oct 12 21:38:08 2024]
+rule split_bed_files:
+    input: shuf.a.bed.gz, shuf.b.bed.gz
+    output: split/X_chr1.bed.gz, split/X_chr2.bed.gz, split/X_chr3.bed.gz, split/X_chr4.bed.gz, split/X_chr5.bed.gz, split/X_chr6.bed.gz, split/X_chr7.bed.gz, split/X_chr8.bed.gz, split/X_chr9.bed.gz, split/X_chr10.bed.gz, split/X_chr11.bed.gz, split/X_chr12.bed.gz, split/X_chr13.bed.gz, split/X_chr14.bed.gz, split/X_chr15.bed.gz, split/X_chr16.bed.gz, split/X_chr17.bed.gz, split/X_chr18.bed.gz, split/X_chr19.bed.gz, split/X_chr20.bed.gz, split/X_chr21.bed.gz, split/X_chr22.bed.gz, split/X_chrX.bed.gz, split/X_chrY.bed.gz
+    jobid: 0
+    reason: Missing output files: split/X_chr17.bed.gz, split/X_chr12.bed.gz, split/X_chrY.bed.gz, split/X_chr4.bed.gz, split/X_chr11.bed.gz, split/X_chr21.bed.gz, split/X_chr3.bed.gz, split/X_chr6.bed.gz, split/X_chr18.bed.gz, split/X_chrX.bed.gz, split/X_chr2.bed.gz, split/X_chr5.bed.gz, split/X_chr8.bed.gz, split/X_chr13.bed.gz, split/X_chr10.bed.gz, split/X_chr9.bed.gz, split/X_chr14.bed.gz, split/X_chr7.bed.gz, split/X_chr16.bed.gz, split/X_chr19.bed.gz, split/X_chr1.bed.gz, split/X_chr15.bed.gz, split/X_chr22.bed.gz, split/X_chr20.bed.gz
+    resources: tmpdir=/tmp
+
+RuleException in rule split_bed_files in file /home/bec51303.iitr/workplace/github/sorted_bed_file_per_sample/quick_bed_sort.smk, line 10:
+AttributeError: 'Wildcards' object has no attribute 'sample_name', when formatting the following:
+
+        for file in {input.bed_files}; do
+            for chrom in $(cat {selection_file}); do
+                zcat $file | awk -v chrom=$chrom '{{if ($1 == chrom) {{print $0}}}}' | gzip > split/{wildcards.sample_name}_$chrom.bed.gz
+            done
+        done
+        
