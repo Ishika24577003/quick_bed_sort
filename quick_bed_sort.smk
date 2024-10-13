@@ -6,6 +6,7 @@ output_dir = "sorted_bed_file_per_sample"
 sample_files = ["shuf.a.bed.gz", "shuf.b.bed.gz"]
 sample_name = "X"
 output_file = f"{sample_name}_{selection_file.split('.')[0]}.bed.gz"
+chrom_selection = [line.strip() for line in open(standard_file)]  
 
 rule split_bed_files:
     input:
